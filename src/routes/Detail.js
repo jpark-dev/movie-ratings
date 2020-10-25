@@ -5,9 +5,10 @@ import { gql, useQuery } from "@apollo/client";
 const GET_MOVIE = gql`
   query getMovie($id: Int!) {
     movie(id: $id) {
-      id
       title
       medium_cover_image
+      language
+      rating
       description_intro
     }
   }
