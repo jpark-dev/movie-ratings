@@ -27,6 +27,7 @@ const Container = styled.div`
 
 const Column = styled.div`
   margin-left: 10px;
+  width: 50%;
 `;
 
 const Title = styled.h1`
@@ -41,12 +42,16 @@ const Subtitle = styled.h4`
 
 const Description = styled.p`
   font-size: 28px;
+  width: 50%;
 `;
 
 const Poster = styled.div`
   width: 25%;
   height: 60%;
   background-color: transparent;
+  background-image: url(${props => props.bg});
+  background-size: cover;
+  background-position: center center;
 `;
 
 export default () => {
@@ -58,11 +63,19 @@ export default () => {
   return (
     <Container>
       <Column>
-        <Title>Title</Title>
-        <Subtitle>Subt</Subtitle>
-        <Description>Desc</Description>
+        <Title>{loading ? "loading" : data.movie.title}</Title>
+        {!loading && data.movie && (
+          <>
+            <Subtitle>
+              {data.movie.language} | {data.movie.rating}
+            </Subtitle>
+            <Description>{data.movie.description_intro}</Description>
+          </>
+        )}
       </Column>
-      <Poster>Image here</Poster>
+      <Poster
+        bg={data && data.movie ? data.movie.medium_cover_image : ""}
+      ></Poster>
     </Container>
   );
 };
